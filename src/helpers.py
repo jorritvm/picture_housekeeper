@@ -6,20 +6,62 @@ import sys
 import settings as s
 import datetime
 
-def string_partial_match_to_list(s, l):
+def stringlist_pmatch_string(l, s):
+    """returns true if any string in the stringlist partially matches string s
+
+    Args:
+        l (list): list of strings to partially match with
+        s (string): string to match
+
+    Returns:
+        boolean: True if a partial match was found
+    """
     match = False
     for element in l:
         if element in s:
             match = True
     return match
 
+def string_pmatch_stringlist(s, l):
+    match = False
+    for element in l:
+        if s in element:
+            match = True
+    return match
+
+def stringlist_pmatch_stringlist(list1, list2):
+    match = False
+    for element1 in list1:
+        for element2 in list2:
+            if element1 in element2:
+                match = True
+    return match
+
 def get_file_size_mb(fp, digits = -1):
+    """returns the file size in megabyte
+
+    Args:
+        fp (string): filepath to file
+        digits (int, optional): round to digits. Defaults to -1.
+
+    Returns:
+        float: size of the file in MB
+    """
     mbsize = os.stat(fp).st_size / 1024 / 1024  
     if digits >= 0:
         mbsize = round(mbsize, digits)
     return mbsize
 
 def get_folder_size_mb(path, digits = -1):
+    """returns the folder size (recursive) in MB
+
+    Args:
+        path (string): path to the folder
+        digits (int, optional): round to digits. Defaults to -1.
+
+    Returns:
+        float: size of the folder in MB
+    """
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(path):
         for f in filenames:

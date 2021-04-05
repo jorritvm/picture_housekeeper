@@ -1,15 +1,19 @@
-import pprint
 import os
 import pandas as pd
 import settings as s
-from helpers import get_video_meta, string_partial_match_to_list, get_folder_size_mb, get_file_size_mb, ts 
+from helpers import get_video_meta, stringlist_pmatch_string, string_pmatch_stringlist, get_folder_size_mb, get_file_size_mb, ts 
 
-pp = pprint.PrettyPrinter(indent = 2)
 actionlist = list()
 
 for root, dirs, files in os.walk(s.folder_to_scan):
     
     # dirs[:] = [d for d in dirs if d not in s.skip_folders]
+    
+    # skip folders that match our skiplist patterns
+    if stringlist_pmatch_string(s.skip_folders_partial_match, os.path.basename(root)):
+        print("skipping folder: " + root)
+        dirs[:] = []
+        continue
 
     # remove empty folders
     if not dirs and not files:
@@ -18,15 +22,9 @@ for root, dirs, files in os.walk(s.folder_to_scan):
         continue
 
     # zip folders that match our ziplist patterns
-    if string_partial_match_to_list(os.path.basename(root), s.zip_folders_partial_match):
+    if stringlist_pmatch_string(s.zip_folders_partial_match, os.path.basename(root)):
         action = {"folder": root, "file": "", "size": get_folder_size_mb(root, 2), "action": "zip_folder", "reason": "basename matches ziplist"}
         actionlist.append(action)
-        dirs[:] = []
-        continue
-
-    # skip folders that match our skiplist patterns
-    if string_partial_match_to_list(os.path.basename(root), s.skip_folders_partial_match):
-        print("skipping folder: " + root)
         dirs[:] = []
         continue
 
@@ -54,8 +52,13 @@ for root, dirs, files in os.walk(s.folder_to_scan):
 
         # remove digital negatives if they are in a trash folder
         elif fext.lower() in [".cr2", ".dng", ".nef"] and ("sel_t" in root or "trash" in root):
-            action = {"action": "remove", 
-                      "reason": "digital negative in a trash folder"}
+            all_files = [os.path.join(path, name) for path, subdirs, files in os.walk(root) for name in files]
+            if string_pmatch_stringlist(os.path.basename(fn) + ".jpg", all_files):
+                action = {"action": "remove", 
+                          "reason": "digital negative in a trash folder"}
+            else:
+                action = {"action": "develop_delete", 
+                          "reason": "digital negative was never developed, can be delete after jpg is created"}
 
         # videofiles
         elif fext.lower() in s.extensions_that_indicate_video_files:
