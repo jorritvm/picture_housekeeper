@@ -9,7 +9,7 @@ This tool takes care of my picture archive (> 250GB) cleanup.
     * skip folders from the skiplist
     * flag empty folders for removal
     * flag certain folders for zipping (configurable)
-    * flag . files for removal
+    * flag '.' files for removal (OSX previews?)
     * flag certain file types for removal (configurable)
     * flag small files for removal
     * flag digital negatives in 'trash folders' for development
@@ -18,5 +18,7 @@ This tool takes care of my picture archive (> 250GB) cleanup.
     * export all actions in an excel file and open this file
 
 3. analyse the excel file and accept actions by putting an 'x' in the first non empty column
+    * if the action is inspect a manual action is needed
+    * if the action is develop, manual operation in lightroom will be needed
 
 4. run perform_actions.py
