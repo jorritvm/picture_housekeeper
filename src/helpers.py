@@ -174,3 +174,31 @@ def compress_folder_with_7z(fp, compression_switch, zip7_path):
 
     # print(subprocess.list2cmdline(command))
     subprocess.run(command)
+
+
+def convert_with_ffmpeg(fpfn, ffmpeg_path):
+    import subprocess
+    import os
+
+    command = [ffmpeg_path,
+               "-y",
+               "-i",
+               fpfn,
+               "-c:v",
+               "libx264",
+               "-preset",
+               "slow",
+               "-crf",
+               "23",
+               "-codec:a",
+               "aac",
+               "-b:a",
+               "96k",
+               "-ac",
+               "2",
+               "-strict",
+               "-2",
+               os.path.join(os.path.dirname(fpfn), os.path.splitext(os.path.basename(fpfn))[0] + ".mkv")]
+
+    print(subprocess.list2cmdline(command))
+    subprocess.run(command)

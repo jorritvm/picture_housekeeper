@@ -4,7 +4,7 @@ import os
 from os.path import basename
 import sys
 import shutil
-from helpers import ask_filepath, compress_folder_with_7z
+from helpers import ask_filepath, compress_folder_with_7z, convert_with_ffmpeg
 
 # fpfn = ask_filepath(s.output_folder)
 fpfn = "D:/dev/python/picture_housekeeper/output/2021-05-19-23-34-28 actionlist_output.xlsx"
@@ -16,6 +16,15 @@ for i in range(df.shape[0]):
         continue
 
     action = df.iloc[i].loc["action"]
+
+    if action == "convert_delete":
+        fpfn = os.path.join(df.iloc[i].loc["folder"], df.iloc[i].loc["file"])
+        try:
+            convert_with_ffmpeg(fpfn, s.fp_ffmpeg)
+        except:
+            e = sys.exc_info()[0]
+            print(e)
+        action = "remove"  # make sure to remove the original file
 
     if action == "remove":
         fp = os.path.join(df.iloc[i].loc["folder"], df.iloc[i].loc["file"])
