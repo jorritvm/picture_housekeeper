@@ -25,6 +25,11 @@ Pictures in current folder and subfolders will be resized.
 1. Put this python file in the folder where it has to archive the subfolders one by one
 2. run the script
 
+## How to use pic mov separator
+A small script to recursively go trough a bunch of folders and put all the pictures in a subfolder called pics.
+1. Put this python file in the folder where it has to start crawling
+2. run the script
+
 ## How to use cleanup
 List and perform cleanup actions
 1. configure options in settings.py 
