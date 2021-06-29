@@ -1,8 +1,32 @@
 # picture_housekeeper
 ## What is it
-This tool takes care of my picture archive (> 250GB) cleanup.
+Ensemble of picture archive maintenance tools
 
-## How to
+## How to use flat2tree
+Will reorganise a flat folder of files into per date subfolders based on date modified.
+1. set up path
+2. execute
+
+## How to use heic2jpg
+1. convert all heic in a folder into jpg & keep exif --> use imazing heic converter
+2. set up path
+3. execute will:
+    * set jpg modified date equal to heic's
+    * remove heic
+    * remove .mov with same name
+
+## How to use archiver
+Folders in current folder will be zipped if the zips don't exist yet.
+1. Put this python file in the folder where it has to archive the subfolders one by one
+2. run the script
+
+## How to use walkresize
+Pictures in current folder and subfolders will be resized.
+1. Put this python file in the folder where it has to archive the subfolders one by one
+2. run the script
+
+## How to use cleanup
+List and perform cleanup actions
 1. configure options in settings.py 
 
 2. run analyse_actions.py, this will:
