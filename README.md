@@ -8,9 +8,10 @@ Will reorganise a flat folder of files into per date subfolders based on date mo
 2. execute
 
 ## How to use heic2jpg
-1. convert all heic in a folder into jpg & keep exif --> use imazing heic converter
+1. convert all heic in a folder into jpg & keep exif - this uses imagemagick and parallel computing
 2. set up path
 3. execute will:
+    * create jpg from existing heic
     * set jpg modified date equal to heic's
     * remove heic
     * remove .mov with same name
