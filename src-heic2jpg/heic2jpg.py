@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import multiprocessing as mp
 
-flat_folder = "D:/pictures/conversietest/5"
+flat_folder = "D:/pictures/iphone_import_emmy"
 
 def convert_heic_to_jpg(src):
     # check for 'imagemagick'
@@ -95,6 +95,13 @@ def main():
                     # remove the mp4
                     print("Removing %s" % (mp4_file))
                     os.remove(os.path.join(flat_folder, mp4_file))
+
+            if ext.lower() == ".jpg" or ext.lower() == ".mov" or ext.lower() == ".heic" or ext.lower() == ".png":
+                json_file = file_name_full + ".json"
+                if os.path.exists(json_file):
+                    # remove the json
+                    print("Removing %s" % (json_file))
+                    os.remove(os.path.join(json_file))
 
         print("Finished!")
 
