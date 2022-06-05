@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import multiprocessing as mp
 
-flat_folder = "D:/pictures/iphone_import_emmy"
+flat_folder = "D:/pictures/2022/2022-05-21 Vrijgezellen Wim Van Damme"
 
 def convert_heic_to_jpg(src):
     # check for 'imagemagick'
