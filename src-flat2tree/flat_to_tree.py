@@ -1,6 +1,6 @@
 import datetime
 import os
-flat_folder = "D:/pictures/iphone_import_emmy"
+flat_folder = "D:/pictures/iphone_import_emmy/2023"
 tree_folder = flat_folder
 
 x = input("are you sure you wish to proceed? (y/n)")

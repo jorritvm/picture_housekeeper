@@ -3,7 +3,7 @@ import json
 import shutil
 import datetime
 
-folder_path = "D:/pictures/iphone_import_emmy"
+folder_path = "D:/pictures/iphone_import_emmy/2022"
 
 def main():
     x = input("are you sure you wish to proceed? (y/n)")
@@ -27,6 +27,13 @@ def main():
             f.close()
 
             key = js['title']
+            
+            # hack in case of duplicate filenames which the json does not know!
+            if "(1)" in json_file:
+                 base, ext = os.path.splitext(key)
+                 key = f"{base}(1){ext}"
+            # end hack
+
             val = js['photoTakenTime']['timestamp']
             info[key] = val
 
