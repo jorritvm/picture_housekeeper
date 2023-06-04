@@ -1,12 +1,13 @@
 # 1. convert all heic in a folder into jpg & keep exif - this uses imagemagick #
 # 2. set jpg modified date equal to heic's
 # 3. remove heic
-# 4. remove .mov with same name
+# 4. remove .mov/.mp4 with same name and nearly same modified time
 
 import os
 import shutil
 import subprocess
 import multiprocessing as mp
+import datetime
 
 flat_folder = "D:/pictures/iphone_import_emmy/2022"
 
@@ -34,6 +35,29 @@ def convert_heic_to_jpg(src):
         ]
         subprocess.call(command)
         os.chdir(pwd)
+
+
+def delete_if_within_same_period(jpg_file, mov_file):
+    """ jpg_file, mov_file must be absolute file path """
+    jpg_modified_time = os.path.getmtime(jpg_file)
+    mov_modified_time = os.path.getmtime(mov_file)
+
+    jpg_modified_datetime = datetime.datetime.fromtimestamp(jpg_modified_time)
+    mov_modified_datetime = datetime.datetime.fromtimestamp(mov_modified_time)
+
+    time_difference = abs(jpg_modified_datetime - mov_modified_datetime)
+
+    if time_difference.total_seconds() <= 300:  # 300 seconds = 5 minutes
+        basename = os.path.basename(mov_file)
+        print(f"Removing {basename}")
+        os.remove(mov_file)
+
+
+def delete_if_without_json(mov_file):
+    """ mov_file must be absolute file path """
+    json_file = mov_file + ".json"
+    if not os.path.exists(json_file):
+        os.remove(mov_file)
 
 
 def main():
@@ -85,16 +109,17 @@ def main():
 
                 mov_file = root + ".mov"
                 if os.path.exists(mov_file):
-
                     # remove the mov
-                    print("Removing %s" % (mov_file))
-                    os.remove(os.path.join(flat_folder, mov_file))
+                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file), 
+                    #                              os.path.join(flat_folder, mov_file))
+                    delete_if_without_json(mov_file)
 
                 mp4_file = root + ".mp4"
                 if os.path.exists(mp4_file):
                     # remove the mp4
-                    print("Removing %s" % (mp4_file))
-                    os.remove(os.path.join(flat_folder, mp4_file))
+                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file), 
+                    #                              os.path.join(flat_folder, mp4_file))
+                    delete_if_without_json(mp4_file)
 
             if ext.lower() == ".jpg" or ext.lower() == ".mov" or ext.lower() == ".heic" or ext.lower() == ".png":
                 json_file = file_name_full + ".json"
