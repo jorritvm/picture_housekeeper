@@ -3,7 +3,8 @@ import json
 import shutil
 import datetime
 
-folder_path = "D:/pictures/iphone_import_emmy/2022"
+folder_path = r"U:\family\pictures\2023\2023-07-16 Denemarken\denemarken-emmy"
+
 
 def main():
     x = input("are you sure you wish to proceed? (y/n)")
@@ -26,15 +27,15 @@ def main():
             js = json.load(f)
             f.close()
 
-            key = js['title']
-            
+            key = js["title"]
+
             # hack in case of duplicate filenames which the json does not know!
             if "(1)" in json_file:
-                 base, ext = os.path.splitext(key)
-                 key = f"{base}(1){ext}"
+                base, ext = os.path.splitext(key)
+                key = f"{base}(1){ext}"
             # end hack
 
-            val = js['photoTakenTime']['timestamp']
+            val = js["photoTakenTime"]["timestamp"]
             info[key] = val
 
         # set file modified date according to date in json
@@ -48,9 +49,6 @@ def main():
 
         print("Finished!")
 
+
 if __name__ == "__main__":
     main()
-
-
-
-

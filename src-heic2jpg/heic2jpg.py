@@ -9,7 +9,8 @@ import subprocess
 import multiprocessing as mp
 import datetime
 
-flat_folder = "D:/pictures/iphone_import_emmy/2022"
+flat_folder = r"U:\family\pictures\2023\2023-07-16 Denemarken\denemarken-emmy"
+
 
 def convert_heic_to_jpg(src):
     # check for 'imagemagick'
@@ -38,7 +39,7 @@ def convert_heic_to_jpg(src):
 
 
 def delete_if_within_same_period(jpg_file, mov_file):
-    """ jpg_file, mov_file must be absolute file path """
+    """jpg_file, mov_file must be absolute file path"""
     jpg_modified_time = os.path.getmtime(jpg_file)
     mov_modified_time = os.path.getmtime(mov_file)
 
@@ -54,7 +55,7 @@ def delete_if_within_same_period(jpg_file, mov_file):
 
 
 def delete_if_without_json(mov_file):
-    """ mov_file must be absolute file path """
+    """mov_file must be absolute file path"""
     json_file = mov_file + ".json"
     if not os.path.exists(json_file):
         os.remove(mov_file)
@@ -65,7 +66,7 @@ def main():
     if x != "y":
         print("Aborting..")
     else:
-        print('-----------------------')
+        print("-----------------------")
         print("Converting HEIC to JPG using parallel application of imagemagick..")
         # first do all required conversions
         all_files = os.listdir(flat_folder)
@@ -88,17 +89,15 @@ def main():
         # then do cleanup
         all_files = os.listdir(flat_folder)
         for file_name in all_files:
-
             file_name_full = os.path.join(flat_folder, file_name)
             root, ext = os.path.splitext(file_name_full)
 
             if ext.lower() == ".heic":
-                print('-----------------------')
+                print("-----------------------")
 
                 jpg_file = root + ".jpg"
 
                 if os.path.exists(jpg_file):
-
                     # copy stats onto the jpg
                     print("Statcopy onto %s" % (jpg_file))
                     shutil.copystat(file_name_full, jpg_file)
@@ -110,18 +109,23 @@ def main():
                 mov_file = root + ".mov"
                 if os.path.exists(mov_file):
                     # remove the mov
-                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file), 
+                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file),
                     #                              os.path.join(flat_folder, mov_file))
                     delete_if_without_json(mov_file)
 
                 mp4_file = root + ".mp4"
                 if os.path.exists(mp4_file):
                     # remove the mp4
-                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file), 
+                    # delete_if_within_same_period(os.path.join(flat_folder, jpg_file),
                     #                              os.path.join(flat_folder, mp4_file))
                     delete_if_without_json(mp4_file)
 
-            if ext.lower() == ".jpg" or ext.lower() == ".mov" or ext.lower() == ".heic" or ext.lower() == ".png":
+            if (
+                ext.lower() == ".jpg"
+                or ext.lower() == ".mov"
+                or ext.lower() == ".heic"
+                or ext.lower() == ".png"
+            ):
                 json_file = file_name_full + ".json"
                 if os.path.exists(json_file):
                     # remove the json
