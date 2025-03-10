@@ -1,19 +1,21 @@
 # picture_housekeeper
 
-## What is it
+An ensemble of picture archive maintenance tools
 
-Ensemble of picture archive maintenance tools
-
-## How to use archiver
+## archiver
 
 Folders in current folder will be zipped if the zips don't exist yet.
+
+### How to use
 
 1. Put this python file in the folder where it has to archive the subfolders one by one
 2. run the script
 
-## How to use cleanup
+## cleanup
 
-List and perform cleanup actions
+Lists and performs cleanup actions
+
+### How to use
 
 1. configure options in settings.py
 
@@ -35,40 +37,60 @@ List and perform cleanup actions
 
 4. run perform_actions.py
 
-## How to use flat2tree
+## flat2tree
 
 Will reorganise a flat folder of files into per date subfolders based on date modified.
+
+### How to use
 
 1. set up path
 2. execute
 
-## How to use heic2jpg
+## heic2jpg
 
-1. convert all heic in a folder into jpg & keep exif - this uses imagemagick and parallel computing
-2. set up path
-3. execute will:
+Convert all heic in a folder into jpg & keep exif - this uses imagemagick and parallel computing
+
+### How to use
+
+1. set up path
+2. execute will:
     * create jpg from existing heic
     * set jpg modified date equal to heic's
     * remove heic
     * remove .mov with same name
 
-## How to use pic mov separator
+## pic mov separator
 
 A small script to recursively go trough a bunch of folders and put all the pictures in a subfolder called pics.
+
+### How to use
 
 1. set up path
 2. run the script
 
-## How to use takeout
+## prefix names
+
+Add the mtime as prefix to all filenames.
+
+### How to use
+
+1. set up path
+2. run the script
+
+## takeout
 
 Parses JSON files from google takeout to correct to 'file modified' time of pictures.
+
+### How to use
 
 1. Put this python file in the folder where it has to archive the subfolders one by one
 2. run the script
 
-## How to use walkresize
+## walkresize
 
-Pictures in current folder and subfolders will be resized.
+Resize pictures in current folder and subfolders 
+
+### How to use
 
 1. Put this python file in the folder where it has to archive the subfolders one by one
 2. run the script
