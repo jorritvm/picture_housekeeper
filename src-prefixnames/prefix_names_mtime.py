@@ -4,7 +4,7 @@
 import os
 from datetime import datetime
 
-flat_folder = r"U:\family\pictures\2023\2023-07-16 Denemarken\denemarken-emmy"
+flat_folder = r"D:\pictures\iphone_import_emmy"
 
 
 def main():

@@ -9,7 +9,7 @@ import subprocess
 import multiprocessing as mp
 import datetime
 
-flat_folder = r"U:\family\pictures\2023\2023-07-16 Denemarken\denemarken-emmy"
+flat_folder = r"D:\pictures\iphone_import_emmy"
 
 
 def convert_heic_to_jpg(src):
@@ -27,7 +27,6 @@ def convert_heic_to_jpg(src):
         os.chdir(src_folder)
         command = [
             "magick",
-            "convert",
             src,
             "-set",
             "filename:base",

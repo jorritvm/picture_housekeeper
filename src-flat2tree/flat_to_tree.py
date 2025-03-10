@@ -1,6 +1,6 @@
 import datetime
 import os
-flat_folder = r"C:\Users\Jorrit\Desktop\emmy_jorrit"
+flat_folder = r"D:\pictures\iphone_import_emmy"
 tree_folder = flat_folder
 
 x = input("are you sure you wish to proceed? (y/n)")

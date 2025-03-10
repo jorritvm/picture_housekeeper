@@ -1,4 +1,4 @@
-# stores date created as  date modified
+# stores date created as date modified
 
 import os
 

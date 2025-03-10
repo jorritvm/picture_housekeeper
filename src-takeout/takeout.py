@@ -3,7 +3,7 @@ import json
 import shutil
 import datetime
 
-folder_path = r"U:\family\pictures\2023\2023-07-16 Denemarken\denemarken-emmy"
+folder_path = r"D:\pictures\iphone_import_emmy"
 
 
 def main():
