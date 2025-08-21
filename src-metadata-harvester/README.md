@@ -9,7 +9,8 @@ this little tool scrapes the mtimes from google using the api, and overwrites th
 - Create or select a project.
 - Navigate to APIs & Services > Library.
 - Search for Google Photos Library API and enable it.
-- Go to Credentials > Create Credentials > OAuth client ID:
+- Navigate to APIs & Services > Credentials
+- Click on Create Credentials > OAuth client ID:
 - Application type: Desktop App
 - Name: Photos API Client
 - Download the credentials.json file.

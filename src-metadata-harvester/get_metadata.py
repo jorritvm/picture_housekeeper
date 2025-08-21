@@ -8,7 +8,7 @@ album_title = "2025 Lentefeest Manon"
 
 
 # Scope needed to read photos and albums
-SCOPES = ['https://www.googleapis.com/auth/photoslibrary.readonly']
+
 
 def authenticate():
     print("-----starting auth-----")
